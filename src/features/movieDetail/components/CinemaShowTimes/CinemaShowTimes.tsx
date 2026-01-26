@@ -1,6 +1,6 @@
-import { useParams } from "react-router";
 import { useQueryShowtimes } from "../../hooks/useQueryShowtimes";
 import { useState } from "react";
+import { CumRap } from "./CumRap";
 
 interface CinemaShowTimesProps {
   maPhim: number;
@@ -8,16 +8,17 @@ interface CinemaShowTimesProps {
 }
 
 export const CinemaShowTimes = ({ maPhim: paramMaPhim, onSelectShowtime }: CinemaShowTimesProps) => {
-  const { maPhim } = useParams();
   const { data, isLoading } = useQueryShowtimes(Number(paramMaPhim));
+   console.log(" SHOWTIMES DATA:", data);
   const [activeIndex, setActiveIndex] = useState(0);
-  const currentHeThong = data?.heThongRapChieu[activeIndex];
+  const heThongRapChieu = data?.heThongRapChieu || [];
+  const currentHeThong = data?.heThongRapChieu?.[activeIndex];
+ 
+
   if (isLoading || !data) return <div>Loading...</div>;
 
-  console.log("SHOWTIMES:", data);
-
   return (
-    <div className=" grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-3 gap-6">
       {/* Cột trái - hệ thống rạp */}
       <div className="space-y-4">
         {data?.heThongRapChieu.map((heThongRap, index) => (
@@ -31,7 +32,7 @@ export const CinemaShowTimes = ({ maPhim: paramMaPhim, onSelectShowtime }: Cinem
             <img
               src={heThongRap.logo}
               alt={heThongRap.tenHeThongRap}
-              className="w-12  mx-auto"
+              className="w-12 mx-auto"
             />
           </button>
         ))}
@@ -40,27 +41,11 @@ export const CinemaShowTimes = ({ maPhim: paramMaPhim, onSelectShowtime }: Cinem
       {/* Cột giữa - cụm rạp */}
       <div className="space-y-6">
         {currentHeThong?.cumRapChieu.map((cumRap) => (
-          <div key={cumRap.maCumRap}>
-            <h3 className="font-semibold">{cumRap.tenCumRap}</h3>
-            <p className="text-sm text-gray-500">{cumRap.diaChi}</p>
-            {/* Lịch chiếu */}
-            <div className="flex flex-wrap gap-2 mt-2">
-              {cumRap.lichChieuPhim.map((lich) => (
-                <button
-                  onClick={() => onSelectShowtime?.(Number(lich.maLichChieu))}
-                  className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-3 py-1 rounded font-semibold text-sm transition duration-200"
-                >
-                  {new Date(lich.ngayChieuGioChieu).toLocaleTimeString(
-                    "vi-VN",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
+          <CumRap
+            key={cumRap.maCumRap}
+            cumRap={cumRap}
+            onSelectShowtime={onSelectShowtime}
+          />
         ))}
       </div>
     </div>

@@ -6,8 +6,8 @@ import type { LichChieuPhimResponse } from "../services/showtimes.type";
 // lấy từ trang showtimes.api.ts
 export const useQueryShowtimes = (maPhim: number) => {
   return useQuery({
-    queryKey: ["showtimes", maPhim],  
+    queryKey: ["showtimes", maPhim],
     queryFn: () => showtimesApi.getShowtimes(maPhim),
-    select: (response) => response.data.content as LichChieuPhimResponse,
+    select: (response) => response.data.content,
   });
-}
+};
