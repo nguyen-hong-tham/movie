@@ -11,7 +11,6 @@ export const MovieHeader = ({ phim }: Props) => {
   const today = new Date()
 
   // FE tự quyết định trạng thái (KHÔNG tin flag API)
-  const isSapChieu = releaseDate > today
   const isDangChieu = releaseDate <= today
 
   return (

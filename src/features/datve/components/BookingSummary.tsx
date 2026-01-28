@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import type { Ghe, ThongTinPhim } from '../services/booking.type';
-import { useSearchParams } from "react-router-dom";
-import { usePhongVe } from "../hook/usePhongVe";
-import { SeatList } from "./SeatList";
 interface BookingSummaryProps {
   movie?: ThongTinPhim;
   selectedSeats: Ghe[];
@@ -11,10 +8,8 @@ interface BookingSummaryProps {
 }
 
 export const BookingSummary = ({ 
-  movie,
   selectedSeats,
   onSubmitBooking,
-  onClose,
 }: BookingSummaryProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -42,9 +37,6 @@ export const BookingSummary = ({
       setIsSubmitting(false);
     }
   };
-  const closeBooking = () => {
-    onClose();
-  }
 
   return (
     <div className="bg-gray-50 p-4 rounded-lg sticky top-20">

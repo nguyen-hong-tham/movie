@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const SeatLegend = () => {
   return (
     <div className="flex gap-6 justify-center py-4 px-6 bg-gray-50 rounded-lg flex-wrap">

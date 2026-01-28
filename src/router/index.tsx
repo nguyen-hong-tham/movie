@@ -4,7 +4,6 @@ import { HomePage } from "@/features/home/components/HomePage";
 import { MovieDetailPage } from "@/features/movieDetail/components/MovieDetailPage";
 import { SignUpPage } from "@/features/signUp/components/SignUpPage";
 import { AppLayout } from "@/layouts/AppLayout";
-import React from "react";
 import { SignInPage } from "@/features/signIn/components/SignInPage";
 import { createBrowserRouter } from "react-router";
 

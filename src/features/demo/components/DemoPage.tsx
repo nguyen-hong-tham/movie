@@ -4,8 +4,6 @@ import { SectionHeader } from './SectionHeader'
 export const DemoPage = () => {
     const [number, setNumber] = React.useState(0)
 
-    const [mixState, setMixState] = React.useState<number|string>('abc')
-
     return (
         <div>
             <SectionHeader

@@ -1,5 +1,4 @@
 import type { Ghe } from "../services/booking.type";
-import React from "react";
 
 interface SeatProps extends Ghe {
   isSelected: boolean; // Ghế này có đang được chọn hay chưa

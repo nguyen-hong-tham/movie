@@ -7,7 +7,7 @@ import { useAppSelector, useAppDispatch } from '@/store'
 import { useQueryUserInfoByAccessToken } from '@/shared/hooks'
 import { logout } from '@/store/auth.slice'
 import { ProfileModal } from '@/features/profile/ProfileModal'
-import { ChevronDown, LogOut, User } from 'lucide-react'
+import { ChevronDown, LogOut } from 'lucide-react'
 
 const navItems = [
   {

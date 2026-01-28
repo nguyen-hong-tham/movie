@@ -11,7 +11,6 @@ export const CinemaShowTimes = ({ maPhim: paramMaPhim, onSelectShowtime }: Cinem
   const { data, isLoading } = useQueryShowtimes(Number(paramMaPhim));
    console.log(" SHOWTIMES DATA:", data);
   const [activeIndex, setActiveIndex] = useState(0);
-  const heThongRapChieu = data?.heThongRapChieu || [];
   const currentHeThong = data?.heThongRapChieu?.[activeIndex];
  
 
