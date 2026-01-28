@@ -1,6 +1,5 @@
 import { X } from "lucide-react";
 import { BookingPage } from "./BookingPage";
-import { useRef } from "react";
 
 interface BookingModalProps {
   maLichChieu: number;
@@ -13,21 +12,7 @@ export const BookingModal = ({
   isOpen,
   onClose,
 }: BookingModalProps) => {
-  const selectedSeatsRef = useRef<number>(0);
-
   if (!isOpen) return null;
-
-  // Handle close button with confirmation
-  const handleCloseHeader = () => {
-    if (selectedSeatsRef.current > 0) {
-      const isConfirm = window.confirm("Bạn đã chọn ghế, bạn có chắc chắn muốn thoát?");
-      if (isConfirm) {
-        onClose();
-      }
-    } else {
-      onClose();
-    }
-  };
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -37,7 +22,7 @@ export const BookingModal = ({
         <div className="flex justify-between items-center border-b p-4 sticky top-0 bg-white">
           <h2 className="text-2xl font-bold"> Chọn Ghế</h2>
           <button
-            onClick={handleCloseHeader}
+            onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-lg"
           >
             <X size={24} />
@@ -53,9 +38,6 @@ export const BookingModal = ({
               onClose();
             }}
             onClose={onClose}
-            onSelectSeatsCount={(count) => {
-              selectedSeatsRef.current = count;
-            }}
           />  {/* Pass props */}
         </div>
       </div>
@@ -63,4 +45,4 @@ export const BookingModal = ({
   );
 };
 
-export default BookingModal;
+

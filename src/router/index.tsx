@@ -4,7 +4,8 @@ import { HomePage } from "@/features/home/components/HomePage";
 import { MovieDetailPage } from "@/features/movieDetail/components/MovieDetailPage";
 import { SignUpPage } from "@/features/signUp/components/SignUpPage";
 import { AppLayout } from "@/layouts/AppLayout";
-
+import React from "react";
+import { SignInPage } from "@/features/signIn/components/SignInPage";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -26,6 +27,11 @@ export const router = createBrowserRouter([
       {
         path: PUBLIC_PATH.SIGN_UP,
         element: <SignUpPage />,
+      },
+
+      {
+        path: PUBLIC_PATH.SIGN_IN,
+        element: <SignInPage />,
       },
     ],
   },

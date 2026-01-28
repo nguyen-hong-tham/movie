@@ -4,9 +4,14 @@ import { MovieHeader } from "./MovieHeader/MovieHeader";
 import { CinemaShowTimes } from "./CinemaShowTimes/CinemaShowTimes";
 import { useState } from "react";
 import { BookingModal } from "@/features/datve/components";
+import { useAppSelector } from "@/store";
+import { useNavigate } from "react-router-dom";
 
 export const MovieDetailPage = () => {
   const { maPhim } = useParams();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector(state => state.auth);
+
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedMaLichChieu, setSelectedMaLichChieu] = useState<number>(0);
 
@@ -18,6 +23,13 @@ export const MovieDetailPage = () => {
   if (!phim) return <div className="text-center py-20">Phim không tồn tại</div>;
 
   const handleSelectShowtime = (maLichChieu: number) => {
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      alert("Vui lòng đăng nhập để đặt vé!");
+      navigate("/sign-up");
+      return;
+    }
+    
     console.log(" Select showtime:", maLichChieu);
     setSelectedMaLichChieu(maLichChieu);
     setIsBookingOpen(true);
@@ -36,7 +48,7 @@ export const MovieDetailPage = () => {
       >
         <div className="container mx-auto px-4 py-20 relative z-10 flex items-center justify-between h-full">
           {/* LEFT: Poster */}
-          <div className="hidden lg:block lg:w-1/4 flex-shrink-0">
+          <div className="hidden lg:block lg:w-1/4 shrink-0">
             <img
               src={phim.hinhAnh}
               alt={phim.tenPhim}

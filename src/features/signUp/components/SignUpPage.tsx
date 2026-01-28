@@ -1,10 +1,11 @@
-import { Button, Form, FormItem, Input, Spinner } from '@/core/ui'
+ import { Button, Form, FormItem, Input, Spinner } from '@/core/ui'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormSignUpSchema } from '../schema'
 import { useMutaRegister } from '../hooks'
 import { toast } from 'sonner'
-
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 // import { z } from 'zod'
 // const schema = z.object({
 //     firstName: z.string().min(2, 'Tên phải có ít nhất 2 ký tự'),
@@ -12,6 +13,8 @@ import { toast } from 'sonner'
 // })
 
 export const SignUpPage = () => {
+    const navigate = useNavigate()
+
     const registerMutation = useMutaRegister()
 
     const form = useForm({
@@ -37,6 +40,8 @@ export const SignUpPage = () => {
                     try {
                         await registerMutation.mutateAsync(values)
                         toast.success('Đăng ký thành công')
+                        // navigate người dùng tới trang đăng nhập
+                        navigate('/sign-in') // chuyển hướng tới trang đăng nhập
                     } catch (error: any) {
                         console.log({ error })
                         toast.error(error?.response?.data?.content || 'Đăng ký thất bại')
@@ -61,6 +66,9 @@ export const SignUpPage = () => {
                 <FormItem control={form.control} label="Mã nhóm" name="maNhom" required>
                     <Input />
                 </FormItem>
+                <p>
+                    Bạn đã có tài khoản? <Link className='text-blue-500' to="/sign-in">Đăng nhập</Link>
+                </p>
                 <Button type="submit" disabled={registerMutation.isPending}>
                     {registerMutation.isPending && <Spinner />}
                     Đăng ký

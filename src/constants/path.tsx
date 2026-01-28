@@ -7,4 +7,5 @@ export const PUBLIC_PATH = {
     MOVIE_DETAIL_PATTERN: '/phim/:maPhim',  // Pattern cho router
     MOVIE_DETAIL: (maPhim: number) => `/phim/${maPhim}`,  // Function cho Link
     SIGN_UP: '/sign-up',
+    SIGN_IN: '/sign-in',
 }

@@ -14,10 +14,9 @@ interface BookingPageProps {
   maLichChieu: number;
   onSubmitClose?: () => void;  // Chỉ gọi khi submit thành công (optional)
   onClose?: () => void;  // Gọi khi đóng modal
-  onSelectSeatsCount?: (count: number) => void;  // Callback để report số ghế được chọn
 }
 
-export const BookingPage = ({ maLichChieu, onSubmitClose, onClose, onSelectSeatsCount }: BookingPageProps) => {
+export const BookingPage = ({ maLichChieu, onSubmitClose, onClose }: BookingPageProps) => {
   console.log("🎬 BookingPage - maLichChieu (from props):", maLichChieu);
 
   // gọi API lấy usePhongVe
@@ -31,7 +30,6 @@ export const BookingPage = ({ maLichChieu, onSubmitClose, onClose, onSelectSeats
   const [selectedSeats, setSelectedSeats] = useState<Ghe[]>([]);
   const handleSelectSeats = (seats: Ghe[]) => {
     setSelectedSeats(seats);
-    onSelectSeatsCount?.(seats.length);  // Report số ghế được chọn
   };
 
   // submit đặt vé
